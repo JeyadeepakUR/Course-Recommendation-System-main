@@ -10,8 +10,6 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template('index.html')
-    return render_template('explore.html')
-    return render_template('about.html')    
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
@@ -42,8 +40,6 @@ def recommend():
         recommended_courses_html += f"<li>{{course}}</li>"
 
     return render_template('index.html', selected_course=selected_course, recommended_courses=recommended_courses_html)
-    return render_template('explore.html', selected_course=selected_course, recommended_courses=recommended_courses_html)
-    return render_template('about.html') 
 
 if __name__ == '__main__':
     app.run(debug=True)
