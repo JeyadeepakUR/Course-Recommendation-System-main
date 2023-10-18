@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Recommendation</title>
+    <link rel= "stylesheet" href="../static/styles.css">
+    <title>Course Catalog</title>
+</head>
+<body>
+    <header>
+        <h1>Course Catalog</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="./explore.html">Courses</a></li>
+            <li><a href="./about.html">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <form id="search-form" action="/recommend" method="POST">
+        <input type="text" id="search-input" placeholder="Search for courses" required>
+        <button type="submit">Search</button>
+    </form>
+    <div id="recommended-courses">
+        <h2>Recommended Courses</h2>
+        <ul>
+            <!-- Recommended courses will be dynamically populated here -->
+        </ul>
+    </div>
+    <footer>
+        <p>&copy; 2023 Your Website Name</p>
+    </footer>
+</body>
+</html>

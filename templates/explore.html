@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Explore Courses</title>
+  <link rel="stylesheet" href="../static/styles.css">
+  <style>
+    .course-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .course-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .course-instructor {
+      font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .course-card {
+        flex-basis: calc(50% - 20px);
+      }
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <h1>Course Catalog</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="./index.html">Home</a></li>
+            <li><a href="#">Courses</a></li>
+            <li><a href="./about.html">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+    <h1>Explore Courses</h1>
+
+    <form id="search-form" action="/recommend" method="POST">
+      <input type="text" id="search-input" placeholder="Search for courses" required>
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="course-list">
+      <!-- Search results will be dynamically populated here -->
+      
+    </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Your Website Name</p>
+    </footer>
+  <script>
+    document.getElementById('search-form').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      var searchInput = document.getElementById('search-input').value;
+      fetchCourses(searchInput);
+    });
+
+    function fetchCourses(searchValue) {
+      // Here, you can make an API call or fetch the course data from a database
+      // based on the searchValue entered by the user.
+      // Example usage:
+      // fetch('/api/courses?search=' + searchValue)
+      //   .then(response => response.json())
+      //   .then(data => displayCourses(data));
+      
+      // For the purpose of this example, we'll simulate getting some dummy course data:
+      var courses = [
+        { title: 'Introduction to HTML', instructor: 'John Doe' },
+        { title: 'JavaScript Basics', instructor: 'Jane Smith' },
+        { title: 'CSS Fundamentals', instructor: 'Jessica Johnson' },
+        { title: 'Python for Beginners', instructor: 'Michael Brown' },
+      ];
+
+      displayCourses(courses);
+    }
+
+    function displayCourses(courses) {
+      var courseList = document.getElementById('course-list');
+      courseList.innerHTML = '';
+
+      if (courses.length === 0) {
+        courseList.innerHTML = '<p>No courses found.</p>';
+        return;
+      }
+
+      for (var i = 0; i < courses.length; i++) {
+        var courseElement = document.createElement('div');
+        courseElement.className = 'course-card';
+
+        var courseTitle = document.createElement('h3');
+        courseTitle.className = 'course-title';
+        courseTitle.innerText = courses[i].title;
+
+        var courseInstructor = document.createElement('p');
+        courseInstructor.className = 'course-instructor';
+        courseInstructor.innerText = 'Instructor: ' + courses[i].instructor;
+
+        courseElement.appendChild(courseTitle);
+        courseElement.appendChild(courseInstructor);
+
+        courseList.appendChild(courseElement);
+      }
+    }
+  </script>
+</body>
+</html>
