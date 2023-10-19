@@ -12,13 +12,13 @@
     </header>
     {% include 'top_nv.html' %}
     <form id="search-form" action="/recommend" method="POST">
-        <input type="text" id="search-input" placeholder="Search for courses" required>
+        <input name="selected_course" type="text" id="search-input" placeholder="Search for courses" required>
         <button type="submit">Search</button>
     </form>
     <div id="recommended-courses">
-        <h2>Recommended Courses</h2>
+        <h2>Recommended Courses for {{selected_course}}</h2>
         <ul>
-            <!-- Recommended courses will be dynamically populated here -->
+            {{recommended_courses|safe}}
         </ul>
     </div>
     <footer>
