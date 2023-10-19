@@ -15,7 +15,7 @@ def home():
     all_courses_html = ""
     for i,r in final_courses.iterrows():
         course_name = r['course_name']
-        course_tags = set(r['tags'].split()[:10])
+        course_tags = set(r['tags'].split()[:7])
         all_courses_html += f"""
         <div class="course-card">
         <h3 class="course-title">{course_name}</h3>

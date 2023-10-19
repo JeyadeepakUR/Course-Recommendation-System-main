@@ -3,33 +3,6 @@
 <head>
   <title>Explore Courses</title>
   <link rel="stylesheet" href="../static/styles.css">
-  <style>
-    .course-card {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .course-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .course-instructor {
-      font-size: 14px;
-    }
-
-    @media (min-width: 768px) {
-      .course-card {
-        flex-basis: calc(50% - 20px);
-      }
-    }
-  </style>
 </head>
 <body>
     <header>
@@ -46,7 +19,7 @@
 
     <div id="course-list">
       <!-- Search results will be dynamically populated here -->
-      
+      {{recommended_courses|safe}}
     </div>
     </main>
 

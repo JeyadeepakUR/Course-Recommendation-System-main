@@ -45,16 +45,16 @@ main {
 .course-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .course-card {
-    width: calc(33.33% - 20px);
+    width: calc(50% - 30px);
     background-color: #fff;
     border: 1px solid #ddd;
-    margin-bottom: 20px;
+    margin: 0 10px 30px;
     padding: 20px;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 .course-card h3 {

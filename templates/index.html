@@ -11,15 +11,9 @@
         <h1>Course Catalog</h1>
     </header>
     {% include 'top_nv.html' %}
-    <form id="search-form" action="/recommend" method="POST">
-        <input name="selected_course" type="text" id="search-input" placeholder="Search for courses" required>
-        <button type="submit">Search</button>
-    </form>
-    <div id="recommended-courses">
-        <h2>Recommended Courses for {{selected_course}}</h2>
-        <ul>
-            {{recommended_courses|safe}}
-        </ul>
+    <div id="course-list">
+        <!-- Search results will be dynamically populated here -->
+        {{all_courses|safe}}
     </div>
     <footer>
         <p>&copy; 2023 Your Website Name</p>
