@@ -13,7 +13,7 @@ final_courses = pd.concat([courses_list, courses_list2], ignore_index=True)
 @app.route('/')
 def home():
     all_courses_html = ""
-    for i,r in final_courses.iterrows():
+    for i,r in list(final_courses.iterrows())[:15]:
         course_name = r['course_name']
         course_tags = set(r['tags'].split()[:7])
         all_courses_html += f"""
