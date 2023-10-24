@@ -3,12 +3,18 @@ import pickle
 import numpy as np
 import pandas as pd
 from flask import Flask, render_template, request
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
 
 # <==== Code starts here ====>
 app = Flask(__name__)
 courses_list = pickle.load(open('courses.pkl','rb'))
 courses_list2 = pickle.load(open('udem_courses.pkl','rb'))
 final_courses = pd.concat([courses_list, courses_list2], ignore_index=True)
+
+# Create a CountVectorizer and fit it on all course tags
+cv = CountVectorizer(max_features=5000, stop_words='english')
+vectors = cv.fit_transform(final_courses['tags']).toarray()
 
 @app.route('/')
 def home():
@@ -26,29 +32,18 @@ def home():
 
 def recommend():  
     print(final_courses.head())
-    # with open("similarity.pkl", "rb") as f:
-    #     data1 = pickle.load(f)
-    # with open("udem_similarity.pkl", "rb") as f:
-    #     data2 = pickle.load(f)
-    # final_data = np.vstack((data1, data2))    
-
-    def recommend(course):
-        search_terms = set(course.split())
-
-        similarity_scores = {}
-        for i,r in final_courses.iterrows():
-            course_name = r['course_name']
-            course_tags = set(r['tags'].split())
-            similarity_scores[course_name] = len(search_terms.intersection(course_tags))
-
-        recommended_course_names = sorted(similarity_scores, key=lambda x: similarity_scores[x], reverse=True)[:7]
-        #print(recommended_course_names)
+    def recommend(course):        
+        course_vector = cv.transform([course]).toarray()
+        similarities = cosine_similarity(course_vector, vectors)
+        course_indices = similarities.argsort()[0][::-1][1:8]
+        recommended_course_names = final_courses.iloc[course_indices]['course_name'].tolist()
         return recommended_course_names
 
     course_list = final_courses['course_name'].values
     selected_course = request.form['selected_course']
 
     recommended_course_names = recommend(selected_course)  
+    recommended_course_names = list(set(recommended_course_names)) # remove duplicates
     recommended_courses_html = ""
     for course in recommended_course_names:
         recommended_courses_html += f"""
